@@ -34,7 +34,9 @@ $this->load->library('geotools');
 if you've installed manually.
 
 
-To calculate the distance between two points create the two locations by callign the geopoint function.
+Distance.
+
+To calculate the distance between two points create the two locations by calling the geopoint function.
 
 $startPoint = $this->geotools->geopoint(55.8333, -4.25);
 $endPoint = $this->geotools->geopoint(55.9464, -3.1991);
@@ -49,6 +51,34 @@ Pythagorean theory -  faster but less accurate over longer distances.
 Haversine - fairly accurate but has a larger performance hit.  This is the default option.
 
 Units supported are 'miles' and 'km'.  Miles are returned by default.
+
+
+Bearing.
+
+To calculate the bearing (in degrees 0-360) between two points
+
+$this->geotools->bearingFrom($startPoint, $endPoint)
+
+You can also pull the rough compass direction using
+
+$this->geotools->compassDirection($startPoint, $endPoint)
+
+
+Midpoint.
+
+To calculate the midpoint of two points
+
+$this->geotools->midpoint($startPoint, $endPoint)
+
+
+End point.
+
+To calculate an endpoint given a startpoint, bearing (0-360 degrees) and distance.
+
+$this->geotools->endpoint($startPoint, $bearing, $distance, $unit);
+
+The unit refers to 'miles' or 'km' and should match what you're passing in to $distance.  It'll default to 'miles'.
+
 
 
 Problems? Suggestions?

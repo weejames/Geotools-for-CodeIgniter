@@ -40,7 +40,7 @@ class Geotools {
 	}
 	
 	
-	public function endpoint($startPoint, $bearing, $distance, $unit = null) {
+	public function endpoint(Geopoint $startPoint, $bearing, $distance, $unit = null) {
 		if (!$unit) $unit = $this->defaultUnit;
 		
 		$radius = $this->earthRadius[$unit];
@@ -55,6 +55,14 @@ class Geotools {
 		$endLon = $lng + atan2( sin($bearing) * sin($distance / $radius) * cos($lat), cos($distance / $radius) - sin($lat) * sin($endLat) );
 		
 		return $this->geopoint(rad2deg($endLat), rad2deg($endLon));
+	}
+	
+	public function midpoint(Geopoint $pointA, Geopoint $pointB) {
+		
+		$bearing = $this->bearingFrom($pointA, $pointB);
+		$distance = $this->distanceBetween($pointA, $pointB);
+		
+		return $this->endpoint($pointA, $bearing, $distance / 2);
 	}
 
 	public function bearingFrom(Geopoint $pointA, Geopoint $pointB) {
