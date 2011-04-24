@@ -2,9 +2,10 @@
 
 class Geotools {
 	
-	private $defaultUnit = 'km';
+	private $defaultUnit = 'miles';
 	private $kmPerMile = 1.609;
 	private $earthRadius = array();
+	private $directions = array("N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW", "N");
 	
 	public function __construct() {
 		$this->earthRadius['miles'] = 3963.19;
@@ -28,7 +29,6 @@ class Geotools {
 				$distanceEW = ($pointB->longitude - $pointA->longitude) * cos($pointA->latitude);
 				$distanceNS = $pointB->latitude - $pointA->latitude;
 				
-				
 				$distance = sqrt( ($distanceEW * $distanceEW) + ($distanceNS * $distanceNS));
 			break;
 		}
@@ -37,6 +37,15 @@ class Geotools {
 		
 		return $distance;
 		
+	}
+
+	
+	public function compassDirection(Geopoint $pointA, Geopoint $pointB) {
+		$bearing = $this->bearingFrom($pointA, $pointB);
+		
+		$tmp = round($bearing / 22.5);
+		
+		return $this->directions[$tmp];
 	}
 	
 	public function geopoint($latitude, $longitude) {
