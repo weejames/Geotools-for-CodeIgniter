@@ -38,6 +38,24 @@ class Geotools {
 		return $distance;
 		
 	}
+	
+	
+	public function endpoint($startPoint, $bearing, $distance, $unit = null) {
+		if (!$unit) $unit = $this->defaultUnit;
+		
+		$radius = $this->earthRadius[$unit];
+
+		$lat = deg2rad($startPoint->latitude);
+		$lng = deg2rad($startPoint->longitude);
+
+		$bearing = deg2rad($bearing);
+		
+		$endLat = asin(sin($lat) * cos($distance / $radius) + cos($lat) * sin($distance / $radius) * cos($bearing));
+		
+		$endLon = $lng + atan2( sin($bearing) * sin($distance / $radius) * cos($lat), cos($distance / $radius) - sin($lat) * sin($endLat) );
+		
+		return $this->geopoint(rad2deg($endLat), rad2deg($endLon));
+	}
 
 	public function bearingFrom(Geopoint $pointA, Geopoint $pointB) {
      $bearing = (rad2deg(atan2(sin(deg2rad($pointB->longitude) - deg2rad($pointA->longitude)) * cos(deg2rad($pointB->latitude)), cos(deg2rad($pointA->latitude)) * sin(deg2rad($pointB->latitude)) - sin(deg2rad($pointA->latitude)) * cos(deg2rad($pointB->latitude)) * cos(deg2rad($pointB->longitude) - deg2rad($pointA->longitude)))) + 360) % 360;
