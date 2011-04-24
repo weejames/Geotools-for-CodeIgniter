@@ -39,6 +39,11 @@ class Geotools {
 		
 	}
 
+	public function bearingFrom(Geopoint $pointA, Geopoint $pointB) {
+     $bearing = (rad2deg(atan2(sin(deg2rad($pointB->longitude) - deg2rad($pointA->longitude)) * cos(deg2rad($pointB->latitude)), cos(deg2rad($pointA->latitude)) * sin(deg2rad($pointB->latitude)) - sin(deg2rad($pointA->latitude)) * cos(deg2rad($pointB->latitude)) * cos(deg2rad($pointB->longitude) - deg2rad($pointA->longitude)))) + 360) % 360;
+		return $bearing;
+	}
+
 	
 	public function compassDirection(Geopoint $pointA, Geopoint $pointB) {
 		$bearing = $this->bearingFrom($pointA, $pointB);
