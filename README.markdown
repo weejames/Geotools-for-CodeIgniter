@@ -25,11 +25,11 @@ or
 
 If you've installed via the spark then add the following to your controller.
 
-`$this->load->spark('geotools');`
+    $this->load->spark('geotools');
 
 or 
 
-`$this->load->library('geotools');`
+    $this->load->library('geotools');
 
 if you've installed manually.
 
@@ -47,8 +47,8 @@ Then call the distanceBetween function to calculate the distance between the two
 
 Two algorithms are available to calculate distance.
 
-Pythagorean theory -  faster but less accurate over longer distances.
-Haversine - fairly accurate but has a larger performance hit.  This is the default option.
+* Pythagorean theory -  faster but less accurate over longer distances.
+* Haversine - fairly accurate but has a larger performance hit.  This is the default option.
 
 Units supported are 'miles' and 'km'.  Miles are returned by default.
 
@@ -82,8 +82,8 @@ The unit refers to 'miles' or 'km' and should match what you're passing in to $d
 
 ### Problems? Suggestions?
 
-Twitter: @weejames
-Email: me@jamesconstable.co.uk
-Web: http://jamesconstable.co.uk
-GitHub: http://github.com/weejames
+* Twitter: @weejames
+* Email: me@jamesconstable.co.uk
+* Web: http://jamesconstable.co.uk
+* GitHub: http://github.com/weejames
 
